@@ -25,7 +25,7 @@ npm-debug.log*
 # Build outputs
 *.pptx
 *.pdf
-*.md
+# *.md  # 注释掉，允许提交文档
 dist/
 build/
 
