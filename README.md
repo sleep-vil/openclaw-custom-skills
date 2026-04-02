@@ -198,7 +198,16 @@ node tools/knowledge-base.js recommend "生成 PPT"
 
 ## 📄 许可证
 
-MIT License
+本项目采用 **MIT 许可证** - 查看 [LICENSE](LICENSE) 文件了解详情
+
+### 📜 开源声明
+
+- ✅ **100% 原创代码** - 所有核心代码均为手写
+- ✅ **完全开源** - 采用 MIT 许可证，可自由使用
+- ✅ **商业友好** - 可用于商业项目
+
+详细开源声明：[OPEN-SOURCE-NOTICE.md](OPEN-SOURCE-NOTICE.md)  
+第三方组件说明：[THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md)
 
 ---
 
