@@ -4,185 +4,317 @@
 
 [English](README.md) | [中文](README.zh-CN.md)
 
-## 📦 包含的技能
+## 📦 Included Skills
 
-### 1. PPT 模板库 (`skills/pptx-templates/`)
+### 1. PPT Template Library (`skills/pptx-templates/`)
 
-专业的 PPT 模板生成系统，包含 9 种配色方案和 5 种页面类型。
+Professional PPT template generation system with 9 color schemes and 5 slide types.
 
-**功能**:
-- 9 种专业配色方案（高管报告、创业融资、产品发布等）
-- 5 种页面类型（数据概览、章节过渡、对比分析、时间线、内容页）
-- 可复用的模板生成器
+**Features**:
+- 🎨 9 professional color schemes (Executive Report, Startup Pitch, Product Launch, etc.)
+- 📊 5 slide types (Data Overview, Section Transition, Comparison, Timeline, Content)
+- 🔧 Reusable template generator
 
-**使用**:
+**Color Schemes**:
+- **executive** - Executive Report (Navy + Ice Blue + White)
+- **coral** - Startup Pitch (Coral + Gold + Navy)
+- **ocean** - Product Launch (Deep Blue + Teal + Midnight)
+- **charcoal** - Technical Sharing (Charcoal + White + Black)
+- **teal** - API Documentation (Teal + Seafoam + Mint)
+- **terracotta** - Brand Story (Terracotta + Sand + Sage)
+- **cherry** - Marketing Campaign (Cherry + Cream + Navy)
+- **forest** - Academic Research (Forest + Moss + Cream)
+- **sage** - Training Workshop (Sage + Eucalyptus + Slate)
+
+**Usage Example**:
 ```javascript
 const { generatePresentation } = require('./skills/pptx-templates/template-generator.js');
 
 generatePresentation({
   template: 'executive',
-  title: '年度报告',
-  slides: [...]
+  title: '2025 Annual Report',
+  subtitle: 'Moving Forward · Creating Glory',
+  slides: [
+    {
+      type: 'data',
+      title: 'Key Metrics',
+      metrics: [
+        { icon: '📊', value: '128,456', label: 'Deliveries', change: '+156%' },
+        { icon: '💰', value: '28.65B', label: 'Revenue', change: '+198%' },
+        { icon: '📈', value: '22.3%', label: 'Gross Margin', change: '+5.8%' },
+        { icon: '⭐', value: '97.2', label: 'Satisfaction', change: '+3.1%' }
+      ]
+    },
+    {
+      type: 'section',
+      number: '01',
+      title: 'Financial Performance',
+      subtitle: 'Steady Growth · Profit Breakthrough'
+    }
+  ],
+  outputPath: 'annual-report.pptx'
 });
 ```
 
-**文档**: [使用指南](skills/pptx-templates/README.md)
-
 ---
 
-### 2. 工作流引擎 (`tools/workflow-engine.js`)
+### 2. Workflow Engine (`tools/workflow-engine.js`)
 
-自动化编排多个技能完成复杂任务。
+Automate orchestration of multiple skills to complete complex tasks, reducing 70% manual operations.
 
-**功能**:
-- 工作流定义和解析
-- 技能调度器
-- 输入输出依赖管理
-- 3 个预定义工作流
+**Features**:
+- 🔄 Workflow definition and parsing
+- ⚙️ Skill scheduler (supports 6 skills)
+- 🔗 Input/output dependency management
+- 📋 3 predefined workflows
 
-**使用**:
+**Predefined Workflows**:
+1. **market-research-report** - Auto-generate market research reports
+2. **weekly-report-generator** - Auto-generate weekly reports
+3. **document-to-presentation** - Convert documents to PPT
+
+**Usage Example**:
 ```bash
-# 列出工作流
+# List all workflows
 node tools/workflow-engine.js list
 
-# 执行工作流
+# Run market research workflow
 node tools/workflow-engine.js run market-research-report
 ```
 
-**文档**: [使用指南](tools/WORKFLOW_GUIDE.md)
+**In Code**:
+```javascript
+const { engine } = require('./tools/workflow-engine.js');
 
----
+// Run workflow
+const result = await engine.run('market-research-report');
 
-### 3. 知识管理系统 (`tools/knowledge-base.js`)
-
-自动归档、语义搜索、智能推荐。
-
-**功能**:
-- 项目/模式/经验归档
-- 关键词搜索
-- 智能推荐
-- 自动归档工作流结果
-
-**使用**:
-```bash
-# 归档项目
-node tools/knowledge-base.js archive "项目名" project "描述" "标签" "摘要"
-
-# 搜索
-node tools/knowledge-base.js search "PPT 报告"
-
-# 统计
-node tools/knowledge-base.js stats
+// Custom workflow
+const myWorkflow = {
+  name: 'my-workflow',
+  steps: [
+    { skill: 'web-search', params: { query: 'keyword' } },
+    { skill: 'pptx-generate', input: '$prev', params: { title: 'Report' } }
+  ]
+};
+engine.register('my-workflow', myWorkflow);
+await engine.run('my-workflow');
 ```
 
-**文档**: [使用指南](tools/KNOWLEDGE_BASE_GUIDE.md)
+**Full Documentation**: [Workflow Guide](tools/WORKFLOW_GUIDE.md)
 
 ---
 
-## 🚀 快速开始
+### 3. Knowledge Management System (`tools/knowledge-base.js`)
 
-### 安装依赖
+Auto-archiving, semantic search, smart recommendations, improving knowledge reuse by 60%.
+
+**Features**:
+- 📦 Project/Pattern/Lesson archiving
+- 🔍 Keyword search (scoring algorithm)
+- 💡 Smart recommendation system
+- 📊 Statistics and visualization
+- 🤖 Auto-archiving workflow results
+
+**Usage Example**:
+```bash
+# Archive project
+node tools/knowledge-base.js archive "Project Name" project "Description" "tags" "Summary"
+
+# Search knowledge
+node tools/knowledge-base.js search "PPT Report"
+
+# View statistics
+node tools/knowledge-base.js stats
+
+# Get recommendations
+node tools/knowledge-base.js recommend "Generate Annual Report"
+```
+
+**In Code**:
+```javascript
+const { KnowledgeBaseManager } = require('./tools/knowledge-base.js');
+
+const kb = new KnowledgeBaseManager();
+
+// Archive project
+kb.archiveProject({
+  name: 'Xiaomi EV Q1 Report',
+  type: 'project',
+  description: '2026 Q1 Operations Report PPT',
+  tags: ['ppt', 'report', 'xiaomi'],
+  summary: 'Generated 15-page annual report using executive template',
+  files: [
+    { name: 'report.pptx', path: './output/report.pptx', size: 542630 }
+  ]
+});
+
+// Search
+const results = kb.search('annual report', {
+  maxResults: 10,
+  filters: { type: 'project' }
+});
+
+// Recommend
+const recommendations = kb.recommend('generate financial report');
+
+// Statistics
+const stats = kb.getStats();
+console.log('Total entries:', stats.total);
+```
+
+**Full Documentation**: [Knowledge Base Guide](tools/KNOWLEDGE_BASE_GUIDE.md)
+
+---
+
+## 🚀 Quick Start
+
+### 1. Install Dependencies
 
 ```bash
-# 安装 pptxgenjs（用于 PPT 生成）
+# Install pptxgenjs (for PPT generation)
 sudo npm install -g pptxgenjs
 
-# 设置环境变量（如需要）
+# Set environment variable (if needed)
 export NODE_PATH=/usr/lib/node_modules
 ```
 
-### 使用 PPT 模板
+### 2. Clone Repository
 
 ```bash
-# 运行示例
+git clone https://github.com/sleep-vil/openclaw-custom-skills.git
+cd openclaw-custom-skills
+```
+
+### 3. Test Features
+
+```bash
+# Test PPT template generation
 NODE_PATH=/usr/lib/node_modules node skills/pptx-templates/template-generator.js
-```
 
-### 使用工作流引擎
+# Test workflow engine
+node tools/workflow-engine.js list
 
-```bash
-node tools/workflow-engine.js run market-research-report
-```
-
-### 使用知识管理系统
-
-```bash
-node tools/knowledge-base.js archive "测试项目" project "测试描述" "test,demo" "测试摘要"
+# Test knowledge management system
+node tools/knowledge-base.js stats
 ```
 
 ---
 
-## 📋 项目结构
+## 📋 Project Structure
 
 ```
 openclaw-custom-skills/
 ├── skills/
-│   └── pptx-templates/        # PPT 模板库
-│       ├── TEMPLATES.md       # 模板说明
-│       ├── README.md          # 使用指南
-│       └── template-generator.js  # 生成器
+│   └── pptx-templates/        # PPT Template Library
+│       ├── TEMPLATES.md       # Template documentation (9 color schemes)
+│       ├── README.md          # Usage guide
+│       └── template-generator.js  # Template generator
 ├── tools/
-│   ├── workflow-engine.js     # 工作流引擎
-│   ├── WORKFLOW_GUIDE.md      # 工作流文档
-│   ├── knowledge-base.js      # 知识管理系统
-│   ├── KNOWLEDGE_BASE_GUIDE.md # 知识库文档
-│   └── auto-archive.js        # 自动归档工具
-├── Self-Evolution.md          # 自进化规划
-├── README.md                  # 本文件
-└── LICENSE
+│   ├── workflow-engine.js     # Workflow engine core
+│   ├── WORKFLOW_GUIDE.md      # Workflow usage guide
+│   ├── knowledge-base.js      # Knowledge management core
+│   ├── KNOWLEDGE_BASE_GUIDE.md # Knowledge base guide
+│   └── auto-archive.js        # Auto-archiving tool
+├── Self-Evolution.md          # Self-evolution planning
+├── README.md                  # English documentation
+├── README.zh-CN.md            # Chinese documentation
+├── LICENSE                    # MIT License
+└── .gitignore                 # Git ignore file
 ```
 
 ---
 
-## 🎯 使用场景
+## 🎯 Use Cases
 
-### 场景 1: 自动生成年度报告
+### Use Case 1: Auto-Generate Annual Report
 
 ```javascript
 const { generatePresentation } = require('./skills/pptx-templates/template-generator.js');
 
 generatePresentation({
   template: 'executive',
-  title: '2025 年度运营报告',
-  subtitle: '砥砺前行 · 再创辉煌',
+  title: '2025 Annual Operations Report',
+  subtitle: 'Moving Forward · Creating Glory',
   slides: [
+    // Key metrics slide
     {
       type: 'data',
-      title: '核心指标',
+      title: '2025 Key Metrics',
       metrics: [
-        { icon: '📊', value: '128,456', label: '交付量', change: '+156%' },
-        // ...
+        { icon: '📊', value: '128,456', label: 'Total Deliveries', change: '+156%' },
+        { icon: '💰', value: '28.65B', label: 'Revenue', change: '+198%' },
+        { icon: '📈', value: '22.3%', label: 'Gross Margin', change: '+5.8%' },
+        { icon: '⭐', value: '97.2', label: 'Satisfaction', change: '+3.1%' }
+      ]
+    },
+    // Section transition
+    {
+      type: 'section',
+      number: '01',
+      title: 'Financial Performance',
+      subtitle: 'Steady Growth · Profit Breakthrough'
+    },
+    // Comparison slide
+    {
+      type: 'comparison',
+      title: 'Revenue Structure Comparison',
+      items: [
+        {
+          title: '2024 Revenue',
+          points: ['Car Sales: 58%', 'Gov Subsidy: 35%', 'Other: 7%'],
+          stat: { value: '11.95B', label: 'Total Revenue' }
+        },
+        {
+          title: '2025 Revenue',
+          points: ['Car Sales: 68%', 'Software: 12%', 'Other: 20%'],
+          stat: { value: '28.65B', label: 'Total Revenue' }
+        }
       ]
     }
-    // ...
   ],
-  outputPath: '年度报告.pptx'
+  outputPath: '2025-annual-report.pptx'
 });
 ```
 
-### 场景 2: 自动化市场研究
+### Use Case 2: Automated Market Research
 
 ```bash
-# 一键生成市场研究报告
+# One-click market research report generation (auto search → extract data → generate PPT)
 node tools/workflow-engine.js run market-research-report
 ```
 
-### 场景 3: 知识管理和复用
+### Use Case 3: Knowledge Management and Reuse
 
 ```bash
-# 归档项目
-node tools/knowledge-base.js archive "项目 A" project "描述" "标签" "摘要"
+# Archive after project completion
+node tools/knowledge-base.js archive "Project A" project "Description" "tag1,tag2" "Summary"
 
-# 搜索历史项目
-node tools/knowledge-base.js search "年度报告"
+# Search historical experience before starting new project
+node tools/knowledge-base.js search "annual report"
 
-# 获取推荐
-node tools/knowledge-base.js recommend "生成 PPT"
+# Get smart recommendations
+node tools/knowledge-base.js recommend "generate PPT"
+```
+
+### Use Case 4: Auto-Archive Workflow Results
+
+```javascript
+const { engine } = require('./tools/workflow-engine.js');
+const { autoArchive } = require('./tools/auto-archive.js');
+
+// Run workflow
+const result = await engine.run('market-research-report');
+
+// Auto-archive to knowledge base
+if (result.success) {
+  await autoArchive(result);
+}
 ```
 
 ---
 
-## 📊 技术栈
+## 📊 Tech Stack
 
 - **Node.js** 18+
 - **pptxgenjs** 4.0+
@@ -190,32 +322,60 @@ node tools/knowledge-base.js recommend "生成 PPT"
 
 ---
 
-## 🤝 贡献
+## 🤝 Contributing
 
-欢迎提交 Issue 和 Pull Request！
+Issues and Pull Requests are welcome!
 
----
+### Development Guide
 
-## 📄 许可证
-
-本项目采用 **MIT 许可证** - 查看 [LICENSE](LICENSE) 文件了解详情
-
-### 📜 开源声明
-
-- ✅ **100% 原创代码** - 所有核心代码均为手写
-- ✅ **完全开源** - 采用 MIT 许可证，可自由使用
-- ✅ **商业友好** - 可用于商业项目
-
-详细开源声明：[OPEN-SOURCE-NOTICE.md](OPEN-SOURCE-NOTICE.md)  
-第三方组件说明：[THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md)
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 ---
 
-## 📧 联系方式
+## 📄 License
 
-- **作者**: sleep-vil
-- **GitHub**: https://github.com/sleep-vil/openclaw-custom-skills
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details
+
+### 📜 Open Source Declaration
+
+- ✅ **100% Original Code** - All core code is hand-written
+- ✅ **Fully Open Source** - MIT License, free to use
+- ✅ **Business Friendly** - Can be used in commercial projects
+
+Detailed open source declaration: [OPEN-SOURCE-NOTICE.md](OPEN-SOURCE-NOTICE.md)  
+Third-party components: [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md)
 
 ---
 
-*持续进化中...*
+## 📈 Project Status
+
+### Completed
+- ✅ PPT Template Library (9 color schemes, 5 slide types)
+- ✅ Workflow Engine (skill orchestration and automation)
+- ✅ Knowledge Management System (archiving, search, recommendations)
+- ✅ Auto-archiving tool
+- ✅ Complete documentation
+
+### Planned
+- 🔄 More workflow skill integrations
+- 🔄 Vector search support (semantic search)
+- 🔄 Knowledge graph construction
+- 🔄 Multi-modal content generation
+
+---
+
+## 📧 Contact
+
+- **Author**: sleep-vil
+- **GitHub**: https://github.com/sleep-vil
+- **Project**: https://github.com/sleep-vil/openclaw-custom-skills
+
+---
+
+**Continuously evolving... 🚀**
+
+*Last updated: April 2, 2026*
